@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'EventZone') }}</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
@@ -34,24 +34,24 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+       <!-- <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    {{ config('app.name', 'EventZone') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
+                    <!-- Left Side Of Navbar --
                     <ul class="navbar-nav me-auto">
 
-                    </ul>
+                    </ul>-->
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
-                        <!-- Authentication Links -->
+                        <!-- Authentication Links --
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
@@ -108,7 +108,7 @@
   </script>
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
-  <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+  <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc --
   <script src="../assets/js/argon-dashboard.min.js?v=2.1.0"></script>
 
   <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
@@ -120,7 +120,14 @@
   <script src="assets/vendor/tinymce/tinymce.min.js"></script>
   <script src="assets/vendor/php-email-form/validate.js"></script>
 
-  <!-- Template Main JS File -->
+  <!-- Template Main JS File --
   <script src="assets/js/main.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+  integrity="sha384-pzjw8f+ua7Kw1TIq0A9fmqUlBX7h2Fkw7FjlOkTQJoVAhCvQoPp0Xt8Nz4z2JS2J" crossorigin="anonymous">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
+  integrity="sha384-pzjw8f+ua7Kw1TIq0A9fmqUlBX7h2Fkw7FjlOkTQJoVAhCvQoPp0Xt8Nz4z2JS2J" crossorigin="anonymous">
+</script>-->
 </body>
 </html>
