@@ -1,6 +1,13 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ProviderController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Auth\LoginController;
+
+
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
@@ -97,3 +104,22 @@ Route::get('/car', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::post('/check-email', [RegisterController::class, 'checkEmail'])->name('check.email');
+// Dashboard Client
+Route::middleware(['auth', 'role:client'])->group(function () {
+    Route::get('/client/dashboard', [ClientController::class, 'index'])->name('client.dashboard');
+});
+
+// Dashboard Prestataire
+Route::middleware(['auth', 'role:provider'])->group(function () {
+    Route::get('/provider/dashboard', [ProviderController::class, 'index'])->name('provider.dashboard');
+});
+
+// Panel Admin
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin.panel');
+});
+
+// Déconnexion
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');

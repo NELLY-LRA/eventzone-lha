@@ -395,7 +395,7 @@
                                             <option value="tente">Tentes</option>
                                             <option value="chaise">Chaises</option>
                                         </select>
-                                            
+
                                             <rect x="2" y="8" width="14" height="2" />
                                             <rect x="2" y="13" width="14" height="2" />
                                             <rect x="2" y="3" width="14" height="2" />
@@ -450,7 +450,7 @@ wt-mb-lg-0">
 
                                     <label for="global-enhancements-search-query"
                                         class="wt-label wt-screen-reader-only">
-                                        Search for items or shops
+                                        Search for items or book
                                     </label>
                                     <div class="search-container" data-id="search-bar">
                                         <div class="wt-input-btn-group global-enhancements-search-input-btn-group emphasized_search_bar emphasized_search_bar_grey_bg search-bar-container"
@@ -539,22 +539,9 @@ wt-mb-lg-0">
                                     </li>
 
 
-                                    <li data-favorites-nav-container data-ge-nav-menu="favorites"
-                                        data-ge-hover-event-name="gnav_hover_favorites_menu">
-                                        <span class="wt-tooltip wt-tooltip--disabled-touch" data-wt-tooltip>
-                                            <a href="#"
-                                                class="wt-tooltip__trigger wt-tooltip__trigger--icon-only wt-btn wt-btn--transparent wt-btn--icon reduced-margin-xs header-button"
-                                                data-favorites-nav-link aria-labelledby="ge-tooltip-label-favorites">
-                                                <span class="etsy-icon"><svg xmlns="http://www.w3.org/2000/svg"
-                                                        viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                                                        <path fill-rule="evenodd" clip-rule="evenodd"
-                                                            d="M20.877 12.52q.081-.115.147-.239A6 6 0 0 0 12 4.528a6 6 0 0 0-9.024 7.753q.066.123.147.24l.673.961a6 6 0 0 0 .789.915L12 21.422l7.415-7.025q.44-.418.789-.915zm-14.916.425L12 18.667l6.04-5.722q.293-.279.525-.61l.673-.961a.3.3 0 0 0 .044-.087 4 4 0 1 0-7.268-2.619v.003L12 8.667l-.013.004v-.002l-.006-.064a3.98 3.98 0 0 0-1.232-2.51 4 4 0 0 0-6.031 5.193q.014.045.044.086l.673.961a4 4 0 0 0 .526.61" />
-                                                    </svg></span>
-                                            </a>
-
-                                            <span id="ge-tooltip-label-favorites" role="tooltip"
-                                                data-favorites-label-tooltip>Favorites</span>
-                                        </span>
+                                    <li>
+                                        <a href="{{ route('logout') }}"
+                                        class="wt-btn wt-btn--small wt-btn--transparent wt-mr-xs-1">Logout</a>
                                     </li>
                                     <li data-gift-mode-nav-container>
                                         <span class="wt-tooltip wt-tooltip--disabled-touch" data-wt-tooltip>
@@ -603,6 +590,8 @@ wt-mb-lg-0">
                     </header>
 
 
+
+
                 </div>
 
                 <nav class="wt-hide-xs wt-show-lg category-nav-button-menu">
@@ -615,39 +604,21 @@ wt-mb-lg-0">
                                     data-menu-ui="menubar" data-ui="top-nav-category-list">
 
                                     <li class="wt-mr-xs-3">
-                                        <a href="/gift-mode?ref=gm_global_nav"
-                                            class="wt-btn wt-btn--transparent wt-btn--small " data-menu-ui="menuitem"
-                                            data-ui="top-nav-category-link" data-node-id="-10">
-                                            <span class="wt-icon wt-icon--smaller-xs wt-nudge-b-1 wt-nudge-r-3"><svg
-                                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                    aria-hidden="true" focusable="false">
-                                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                                        d="M5.535 7A4 4 0 0 1 12 2.354 4 4 0 0 1 18.465 7H22v9h-1v6H3v-6H2V7zm9.466 0H13V5a2 2 0 1 1 2.001 2M11 5a2 2 0 1 0-2.001 2H11zm-.764 4c-.55.614-1.348 1-2.236 1v2a4.98 4.98 0 0 0 3-1v3H4V9zM13 11c.836.628 1.874 1 3 1v-2a3 3 0 0 1-2.236-1H20v5h-7zm-8 5v4h6v-4zm8 4v-4h6v4z" />
-                                                </svg></span><span>
-                                                Gifts
-                                            </span>
-                                        </a>
+                                        <a href="{{ route('home') }}">Home</a>
+
+                                        @if(auth()->user()->role == 'client')
                                     </li>
                                     <li class="wt-mr-xs-3">
-                                        <a href="https://www.etsy.com/c/gifts/birthday-gifts?ref=BDAY25_cat_nav"
-                                            class="wt-btn wt-btn--transparent wt-btn--small " data-menu-ui="menuitem"
-                                            data-ui="top-nav-category-link">
-                                            Special Birthday Gifts
-                                        </a>
+                                        <a href="{{ route('client.dashboard') }}">My Reservations</a>
+                                        @elseif(auth()->user()->role == 'provider')
                                     </li>
                                     <li class="wt-mr-xs-3">
-                                        <a href="/featured/hub/home-favorites?ref=contentful_promo_cat_nav-4"
-                                            class="wt-btn wt-btn--transparent wt-btn--small " data-menu-ui="menuitem"
-                                            data-ui="top-nav-category-link" data-node-id="2">
-                                            Home Favorites
-                                        </a>
+                                        <a href="{{ route('provider.services') }}">Manage Services</a>
+                                        @elseif(auth()->user()->role == 'admin')
                                     </li>
                                     <li class="wt-mr-xs-3">
-                                        <a href="/featured/hub/fashion-favorites?ref=contentful_promo_cat_nav-5"
-                                            class="wt-btn wt-btn--transparent wt-btn--small " data-menu-ui="menuitem"
-                                            data-ui="top-nav-category-link" data-node-id="3">
-                                            Fashion Finds
-                                        </a>
+                                        <a href="{{ route('admin.panel') }}">Admin Panel</a>
+                                        @endif
                                     </li>
                                     <li class="wt-mr-xs-3">
                                         <a href="{{route('register')}}"

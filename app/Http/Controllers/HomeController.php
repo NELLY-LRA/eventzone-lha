@@ -25,4 +25,16 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+    public function redirectToDashboard()
+{
+    $role = auth()->user()->role;
+
+    return match ($role) {
+        'client' => view('dashboard.client'),
+        'provider' => view('dashboard.provider'),
+        'admin' => view('dashboard.admin'),
+        default => abort(403, 'Unauthorized access'),
+    };
+}
 }

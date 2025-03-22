@@ -100,7 +100,7 @@
                     <p class="text-center small">Enter your personal details to create account</p>
                   </div>
 
-                  <form class="row g-3 needs-validation" method="POST" action="{{ route('register') }}">
+                  <form id="register-form" class="row g-3 needs-validation" method="POST" action="{{ route('register') }}">
                     @csrf
                     <div class="col-12">
                         <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
@@ -138,7 +138,13 @@
                         <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
                             <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                         </div>
-
+                        <div class="col-12">
+                            <label for="role">Choose your role :</label>
+                            <select name="role" id="role" required>
+                                <option value="client">Client</option>
+                                <option value="prestataire">Provider</option>
+                            </select>
+                        </div>
                       <div class="col-12">
                         <div class="form-check">
                           <input class="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required>
@@ -152,7 +158,51 @@
                       <div class="col-12">
                         <p class="small mb-0">Already have an account? <a href="{{route('login')}}">Log in</a></p>
                       </div>
+
                     </form>
+
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function () {
+                            const emailInput = document.getElementById('email');
+                            const emailError = document.getElementById('email-error');
+                            const form = document.getElementById('register-form');
+
+                            emailInput.addEventListener('keyup', function () {
+                                const email = emailInput.value;
+
+                                if (email.length > 3) {
+                                    fetch("{{ route('check.email') }}", {
+                                        method: "POST",
+                                        headers: {
+                                            "X-CSRF-TOKEN": "{{ csrf_token() }}",
+                                            "Content-Type": "application/json"
+                                        },
+                                        body: JSON.stringify({ email: email })
+                                    })
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        if (data.exists) {
+                                            emailError.textContent = "Cet email est déjà utilisé.";
+                                            emailInput.style.border = "2px solid red";
+                                        } else {
+                                            emailError.textContent = "";
+                                            emailInput.style.border = "2px solid green";
+                                        }
+                                    });
+                                } else {
+                                    emailError.textContent = "";
+                                    emailInput.style.border = "1px solid #ccc";
+                                }
+                            });
+
+                            form.addEventListener('submit', function (event) {
+                                if (emailError.textContent !== "") {
+                                    event.preventDefault();
+                                    alert("Veuillez corriger les erreurs avant de soumettre le formulaire.");
+                                }
+                            });
+                        });
+                    </script>
 
                   </div>
                 </div>
