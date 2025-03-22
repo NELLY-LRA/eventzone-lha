@@ -91,7 +91,7 @@
         <main class="py-4">
             @yield('content')
         </main>
-    </div>
+    </div>-->
 
     <script src="../assets/js/core/popper.min.js"></script>
   <script src="../assets/js/core/bootstrap.min.js"></script>
@@ -104,6 +104,33 @@
         damping: '0.5'
       }
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+
+      @if(auth()->check())
+    @if(auth()->user()->role == 'client')
+        <h1>Welcome, dear Client!</h1>
+    @elseif(auth()->user()->role == 'provider')
+        <h1>Welcome, valued Provider!</h1>
+    @elseif(auth()->user()->role == 'admin')
+        <h1>Welcome, Admin!</h1>
+    @endif
+@else
+    <h1>Welcome to Eventzone!</h1>
+@endif
+
+@if(auth()->check())
+    @if(auth()->user()->role === 'client')
+        <a href="{{ route('client.dashboard') }}">Client Dashboard</a>
+    @elseif(auth()->user()->role === 'provider')
+        <a href="{{ route('provider.dashboard') }}">Provider Dashboard</a>
+    @elseif(auth()->user()->role === 'admin')
+        <a href="{{ route('admin.panel') }}">Admin Panel</a>
+    @endif
+    <form action="{{ route('logout') }}" method="POST">
+        @csrf
+        <button type="submit">Logout</button>
+    </form>
+@endif
+
     }
   </script>
   <!-- Github buttons -->
@@ -128,6 +155,6 @@
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
   integrity="sha384-pzjw8f+ua7Kw1TIq0A9fmqUlBX7h2Fkw7FjlOkTQJoVAhCvQoPp0Xt8Nz4z2JS2J" crossorigin="anonymous">
-</script>-->
+</script>
 </body>
 </html>

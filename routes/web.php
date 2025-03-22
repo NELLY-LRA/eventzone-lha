@@ -9,12 +9,13 @@ use App\Http\Controllers\Auth\LoginController;
 
 
 Route::get('/', function () {
+    return view('acceuil');
+})->name('acceuil');
+
+Route::get('/welcome', function () {
     return view('welcome');
 })->name('welcome');
 
-Route::get('/acceuil', function () {
-    return view('acceuil');
-})->name('acceuil');
 Route::get('/reservation', function () {
     return view('reservation');
 })->name('reservation');
@@ -123,3 +124,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
 // Déconnexion
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/provider/services', [ProviderController::class, 'index'])->name('provider.services');
+});
